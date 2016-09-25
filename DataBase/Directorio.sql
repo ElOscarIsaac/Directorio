@@ -1,17 +1,29 @@
 CREATE DATABASE Directorio;
 USE Directorio;
+CREATE TABLE Usuarios(
+	UsuarioID INT PRIMARY KEY AUTO_INCREMENT,
+	vchNombreEmpleado VARCHAR(100) NOT NULL,
+    vchNombreUsuario VARCHAR(100) NOT NULL,
+    vchPassword VARCHAR(100) NOT NULL,
+    vchCorreoElectronico VARCHAR(100) NOT NULL,
+    datFechaRegistro DATETIME NOT NULL,
+    bitActivo BIT NOT NULL
+);
+INSERT INTO Usuarios(vchNombreEmpleado, vchNombreUsuario, vchPassword, vchCorreoElectronico, datFechaRegistro, bitActivo) VALUES(
+	'LAZARO ADRIAN GONZALEZ MONTOYA', 'lgonzalez', 'livsolskjaer', 'lgonzalez@fujifilm.com.mx', CURDATE(), 1
+);
 CREATE TABLE Ubicacion(
 	UbicacionID INT PRIMARY KEY AUTO_INCREMENT,
     vchDescripcion VARCHAR(100) NOT NULL,
     bitActivo BIT NOT NULL
 );
 CREATE TABLE Departamento(
-	DepartamentoID INT AUTO_INCREMENT,
+	DepartamentoID INT PRIMARY KEY AUTO_INCREMENT,
     vchDescripcion VARCHAR(100) NOT NULL,
 	bitActivo BIT NOT NULL
 );
 CREATE TABLE Division(
-	DivisionID INT auto_increment,
+	DivisionID INT PRIMARY KEY AUTO_INCREMENT,
     DepartamentoID INT NOT NULL,
     foreign key (DepartamentoID) references Departamento(DepartamentoID),
     vchDescripcion varchar(100) not null,
