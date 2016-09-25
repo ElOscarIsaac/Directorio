@@ -1,0 +1,19 @@
+﻿<div layout-margin layout="column" layout-align="center center">
+    <md-content layout="column" layout-align="center start">
+        <h4 class="md-subhead">Ingresar</h4>
+        <form layout="column" layout-align="center center">
+            <md-input-container class="md-icon-float ">
+                <label>Usuario</label>
+                <md-icon md-svg-src="Presentation/assets/user_icon.svg" class="name"></md-icon>
+                <input ng-model="Request.usuario" type="text">
+            </md-input-container>
+            <md-input-container class="md-icon-float ">
+                <label>Password</label>
+                <md-icon md-svg-src="Presentation/assets/password_icon.svg" class="name"></md-icon>
+                <input ng-model="Request.password" type="password">
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="Ingresar(Request, $event)" type="submit">Ingresar</md-button>
+            <a href="" ng-click="RecuperarCredenciales($event)">¿Olvidó su contraseña?</a>
+        </form>
+    </md-content>
+</div>
