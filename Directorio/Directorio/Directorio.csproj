@@ -41,35 +41,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DirectorioCore\Libs\Net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -97,6 +73,8 @@
     <Content Include="Presentation\assets\addFile.png" />
     <Content Include="Presentation\assets\close.svg" />
     <Content Include="Presentation\assets\country.svg" />
+    <Content Include="Presentation\assets\delete.svg" />
+    <Content Include="Presentation\assets\edit.svg" />
     <Content Include="Presentation\assets\location.svg" />
     <Content Include="Presentation\assets\Money.svg" />
     <Content Include="Presentation\assets\More.svg" />
@@ -105,12 +83,15 @@
     <Content Include="Presentation\assets\SignOut.svg" />
     <Content Include="Presentation\assets\Time.svg" />
     <Content Include="Presentation\assets\user_icon.svg" />
+    <Content Include="Presentation\Home\Empleado\Empleado.html" />
     <Content Include="Presentation\Home\Home.html" />
     <Content Include="Presentation\Home\HomeController.js" />
     <Content Include="Presentation\Home\HomeServices.js" />
     <Content Include="Presentation\Login\Controller.js" />
     <Content Include="Presentation\Login\Login.html" />
     <Content Include="Presentation\Login\Service.js" />
+    <Content Include="Presentation\Recuperacion\recover.js" />
+    <Content Include="Presentation\Recuperacion\RecoverCredentials.html" />
     <Content Include="Presentation\scripts\angular-animate.min.js" />
     <Content Include="Presentation\scripts\angular-aria.min.js" />
     <Content Include="Presentation\scripts\angular-cookies.min.js" />
@@ -133,11 +114,11 @@
       <DependentUpon>DirectorioService.svc</DependentUpon>
     </Compile>
     <Compile Include="IDirectorioService.cs" />
+    <Compile Include="MultipartParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,1 +1,62 @@
 ﻿
+<div flex-xs flex-gt-xs="65" layout="row" layout-align="center">
+    <md-card flex>
+        <md-card-title>
+            <md-card-title-text>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2>
+                            <span>EMPLEADOS</span>
+                        </h2>
+                        <span flex></span>
+                        <md-menu>
+                            <md-button aria-label="Operaciones de directorio" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+                                <md-icon md-menu-origin md-svg-icon="Presentation/assets/Add.svg"></md-icon>
+                            </md-button>
+                            <md-menu-content>
+                                <md-menu-item>
+                                    <md-button ng-click="AgregarEmpleado($event, false)">
+                                        <md-icon md-svg-icon="Presentation/assets/AddClient.svg" md-menu-align-target></md-icon>
+                                        Agregar Empleado
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
+                </md-toolbar>
+                <div class="table-responsive">
+                    <table st-table="Empleados" class="table table-sm table-hover" >
+                        <thead>
+                            <tr>
+                                <th class=" text-center">
+
+                                </th>
+                                <th class="text-center" st-sort="Id">Folio</th>
+                                <th class="text-center" st-sort="Nombre">Nombre</th>
+                                <th class="text-center">Area</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="Empleado in Empleados">
+                                <td class="text-center">
+                                    <md-icon title="Editar empleado" md-svg-src="Presentation/assets/edit.svg" ng-click=""></md-icon>
+                                    <md-icon title="Eliminar empleado" md-svg-src="Presentation/assets/delete.svg" ng-click=""></md-icon>
+                                </td>
+                                <td class="text-center">{{Empleado.Id}}</td>
+                                <td class="text-left">{{Empleado.Nombre}}</td>
+                                <td class="text-left">{{Empleado.Departamento.descripcion}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </md-card-title-text>
+        </md-card-title>
+    </md-card>
+</div>

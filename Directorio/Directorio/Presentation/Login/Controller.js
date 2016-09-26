@@ -44,6 +44,6 @@
             });
         }
         $scope.RecuperarCredenciales = function (evt) {
-            location.href = 'http://' + location.host + '/RequestManagement/Presentation/RecoverCredentials/RecoverCredentials.html';
+            location.href = 'http://' + location.host + '/Directorio/Presentation/Recuperacion/RecoverCredentials.html';
         };
     }]);

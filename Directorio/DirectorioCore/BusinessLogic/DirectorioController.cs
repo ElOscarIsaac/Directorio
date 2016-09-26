@@ -13,10 +13,6 @@ namespace DirectorioCore.BusinessLogic
 {
     public class DirectorioController
     {
-        public DirectorioController()
-        {
-
-        }
         /// <summary>
         /// Método que permite logear a un usuario, se devuelve la variable de login (LoginResponse)
         /// </summary>
@@ -40,6 +36,125 @@ namespace DirectorioCore.BusinessLogic
                 Log.EscribeLog("Error en el método DirectorioController.Login: " + exc.Message);
             }
             return Response;
+        }
+        /// <summary>
+        /// Método que permite obtener el catálogo de los empleados desde el sistema de nómina
+        /// </summary>
+        /// <param name="Request"></param>
+        /// <returns></returns>
+        public CatalogoResponse CatalogoEmpleados(CatalogoRequest Request)
+        {
+            CatalogoResponse Response = new CatalogoResponse();
+            Response.Lista = DataAccess.EslabonDA.CatalogoEmpleados();
+            return Response;
+        }
+        /// <summary>
+        /// Método que permite obtener el catálogo de ubicaciones
+        /// </summary>
+        /// <param name="Request"></param>
+        /// <returns></returns>
+        public CatalogoResponse CatalogoUbicaciones(CatalogoRequest Request)
+        {
+            CatalogoResponse Response = new CatalogoResponse();
+            Response.Lista = DataAccess.DirectorioDA.CatalogoUbicaciones();
+            return Response;
+        }
+        /// <summary>
+        /// Método que permite obtener el catálogo de áreas
+        /// </summary>
+        /// <param name="Request"></param>
+        /// <returns></returns>
+        public CatalogoResponse CatalogoAreas(CatalogoRequest Request)
+        {
+            CatalogoResponse Response = new CatalogoResponse();
+            Response.Lista = DataAccess.DirectorioDA.CatalogoAreas();
+            return Response;
+        }
+        /// <summary>
+        /// Método que permite obtener el catálogo de divisiones
+        /// </summary>
+        /// <param name="Request"></param>
+        /// <returns></returns>
+        public CatalogoResponse CatalogoDivisiones(CatalogoRequest Request)
+        {
+            CatalogoResponse Response = new CatalogoResponse();
+            Response.Lista = DataAccess.DirectorioDA.CatalogoDivisones();
+            return Response;
+        }
+        /// <summary>
+        /// Método de la capa de control que permite agregar un empleado al directorio
+        /// </summary>
+        /// <param name="Request"></param>
+        /// <returns></returns>
+        public AgregarEmpleadoResponse AgregarEmpleado(Empleado Request)
+        {
+            AgregarEmpleadoResponse Response = new AgregarEmpleadoResponse();
+            try 
+            {
+                Request.Id = DataAccess.DirectorioDA.InsertaEmpleado(Request);
+                if(Request.Id > 0)
+                {
+                    Response.Message = "Empleado agregado correctamente";
+                    Response.Success = true;
+                }
+                else
+                {
+                    Response.Message = "Ocurrió un problema al intentar insertar el empleado en la base de datos";
+                    Response.Success = false;
+                }
+                
+            }
+            catch (Exception exc)
+            {
+                Log.EscribeLog("Error al ejecutar el método BusinessLogic.AgregarEmpleado: " + exc.Message);
+            }
+            return Response;
+        }
+        /// <summary>
+        /// Método que permite extraer los empleados contenidos en el directorio
+        /// </summary>
+        /// <returns></returns>
+        public ConsultaEmpleadosResponse ConsultaEmpleados()
+        {
+            ConsultaEmpleadosResponse Response = new ConsultaEmpleadosResponse();
+            try
+            {
+                Response.Empleados = DataAccess.DirectorioDA.ConsultaEmpleados();
+            }
+            catch(Exception exc)
+            {
+                Log.EscribeLog("Error al ejecutar el método BusinessLogic.ConsultaEmpleados: " + exc.Message);
+            }
+            return Response;
+        }
+        /// <summary>
+        /// Método que permite enviar por correo las credenciales del usuario con el correo electrónico proporcionado
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <returns></returns>
+        public bool EnviarCredenciales(string mail)
+        {
+            bool Enviado = false;
+            Entities.Usuario user = new Entities.Usuario();
+            try
+            {
+                user.Id = DataAccess.DirectorioDA.EmailExists(mail);
+                if (user.Id > 0)
+                {
+                    user = DataAccess.DirectorioDA.GetUser(user.Id);
+                    string Mensaje = @"<p>Hola " + user.NombreEmpleado + @", hemos recibido una solicitud de recuperación de credenciales para acceso al sistema de directorio</p>
+                                       <p>Tus credenciales son las siguientes:</p>
+                                       <p><strong>Usuario: </strong>" + user.NombreUsuario + @"</p>
+                                       <p><strong>Contraseña: </strong>" + user.Password + @"</p>
+                                       <p>Si usted no solicitó esta recuperación, favor de hacer caso omiso";
+                    Enviado = SendMail(mail, "Recuperación de credenciales", Mensaje);
+                }
+            }
+            catch (Exception exc)
+            {
+                Log.EscribeLog("Error en el método Controller.EnviarCredenciales: " + exc.Message);
+            }
+            return Enviado;
         }
         /// <summary>
         /// Permite enviar un correo electrónico desde la cuenta de correo configurada en la aplicación

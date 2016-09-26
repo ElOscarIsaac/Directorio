@@ -1,0 +1,103 @@
+﻿<md-dialog aria-label="Empleado">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Agregar Empleado</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="Presentation/assets/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>Modificar datos de usuario</h2>
+                <p style="margin-bottom:20px;">En el siguiente apartado podrá dar de alta un empleado al directorio</p>
+                <ng-form name="EmpleadoForm" layout="column" layout-align="center stretch">
+                    <div class="md-block" style="margin-bottom:15px;" flex>
+                        <md-autocomplete md-selected-item="EmpleadoSeleccionado"
+                                         md-selected-item-change="selectedItemChange(empleado)"
+                                         md-search-text="searchText"
+                                         md-items="empleado in querySearch(searchText)"
+                                         md-item-text="empleado.descripcion"
+                                         placeholder="Empleado">
+                            <md-item-template>
+                                <span md-highlight-text="searchText" md-highlight-flags="^i">{{empleado.descripcion}}</span>
+                            </md-item-template>
+                            <md-not-found>
+                                No existen coincidencias con "{{searchText}}".
+                            </md-not-found>
+                        </md-autocomplete>
+                    </div>
+                    <md-input-container class="md-block" flex>
+                        <label>Puesto</label>
+                        <input type="text" required ng-model="Empleado.Puesto" name="Puesto"/>
+                        <div ng-messages="EmpleadoForm.Puesto.$error" ng-if="EmpleadoForm.Puesto.$touched">
+                            <div ng-message="required">Información requerida</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>Área</label>
+                        <md-select ng-model="Empleado.Departamento" name="Area" required placeholder="Área">
+                            <md-option ng-repeat="area in areas" ng-value="area">
+                                {{area.descripcion}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>División</label>
+                        <md-select ng-model="Empleado.Division" name="Division" required>
+                            <md-option ng-repeat="division in DivisionesDisponibles()" ng-value="division">
+                                {{division.descripcion}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>Extensión</label>
+                        <input type="text" required ng-model="Empleado.Extension" name="Extension" />
+                        <div ng-messages="EmpleadoForm.Extension.$error" ng-if="EmpleadoForm.Extension.$touched">
+                            <div ng-message="required">Información requerida</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>Número Directo</label>
+                        <input type="text" ng-model="Empleado.NumeroDirecto" name="NumeroDirecto" />
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>Correo Electrónico</label>
+                        <input type="email" required ng-model="Empleado.Correo" name="Correo" />
+                        <div ng-messages="EmpleadoForm.Correo.$error" ng-if="EmpleadoForm.Correo.$touched">
+                            <div ng-message="required">Información requerida</div>
+                            <div ng-message="email">Correo electrónico inválido</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>Celular</label>
+                        <input type="text" ng-model="Empleado.Celular" name="Celular" />
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>Ubicación</label>
+                        <md-select ng-model="Empleado.Ubicacion" name="Ubicacion" required>
+                            <md-option ng-repeat="ubicacion in ubicaciones" ng-value="ubicacion">
+                                {{ubicacion.descripcion}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </ng-form>
+                <div id="Fotografia" layout="row" layout-align="start center">
+                    <img src="Presentation/assets/addFile.png" style="width:32px; height:auto; margin-right:10px; margin-left:10px;" />
+                    <input id="Foto" type="file" onchange="angular.element(this).scope().FotoLoaded = true;" accept="image/jpeg" />
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised" ng-click="cancel()">
+                Cancelar
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="save(Empleado)" ng-disabled="EmpleadoForm.$invalid || !EmpleadoSeleccionado">
+                Guardar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

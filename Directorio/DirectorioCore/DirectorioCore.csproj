@@ -49,11 +49,18 @@
     <Compile Include="BusinessLogic\Log.cs" />
     <Compile Include="BusinessLogic\Security.cs" />
     <Compile Include="DataAccess\DirectorioDA.cs" />
+    <Compile Include="DataAccess\EslabonDA.cs" />
+    <Compile Include="Entities\Catalogo.cs" />
     <Compile Include="Entities\Empleado.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceContracts\Request\AgregarEmpleadoRequest.cs" />
+    <Compile Include="ServiceContracts\Request\CatalogoRequest.cs" />
     <Compile Include="ServiceContracts\Request\ConsultarEmpleadosRequest.cs" />
     <Compile Include="ServiceContracts\Request\LoginRequest.cs" />
+    <Compile Include="ServiceContracts\Response\AgregarEmpleadoResponse.cs" />
+    <Compile Include="ServiceContracts\Response\CatalogoResponse.cs" />
+    <Compile Include="ServiceContracts\Response\ConsultaEmpleadosResponse.cs" />
     <Compile Include="ServiceContracts\Response\LoginResponse.cs" />
   </ItemGroup>
   <ItemGroup />
