@@ -11,9 +11,9 @@ namespace DirectorioCore.ServiceContracts.Response
         public AgregarEmpleadoResponse()
         {
             Message = string.Empty;
-            Success = string.Empty;
+            Success = false;
         }
         public string Message { get; set; }
-        public string Success { get; set; }
+        public bool Success { get; set; }
     }
 }
