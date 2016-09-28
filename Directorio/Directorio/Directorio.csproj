@@ -76,7 +76,9 @@
     <Content Include="Presentation\assets\country.svg" />
     <Content Include="Presentation\assets\delete.svg" />
     <Content Include="Presentation\assets\edit.svg" />
+    <Content Include="Presentation\assets\Fondo_header.jpg" />
     <Content Include="Presentation\assets\location.svg" />
+    <Content Include="Presentation\assets\logo.png" />
     <Content Include="Presentation\assets\Money.svg" />
     <Content Include="Presentation\assets\More.svg" />
     <Content Include="Presentation\assets\password_icon.svg" />
