@@ -361,9 +361,9 @@ namespace DirectorioCore.DataAccess
                     command.Parameters.AddWithValue("@vchPuesto", request.Puesto);
                     command.Parameters.AddWithValue("@vchCorreo", request.Correo);
                     command.Parameters.AddWithValue("@vchCelular", request.Celular);
-                    command.Parameters.AddWithValue("@DepartamentoID", request.Departamento);
-                    command.Parameters.AddWithValue("@DivisionID", request.Division);
-                    command.Parameters.AddWithValue("@UbicacionID", request.Ubicacion);
+                    command.Parameters.AddWithValue("@DepartamentoID", request.Departamento.id);
+                    command.Parameters.AddWithValue("@DivisionID", request.Division.id);
+                    command.Parameters.AddWithValue("@UbicacionID", request.Ubicacion.id);
                     command.Parameters.AddWithValue("@vchNumeroDirecto", request.NumeroDirecto);
                     command.Parameters.AddWithValue("@txtFoto", request.Foto);
                     command.Parameters.AddWithValue("@bitActivo", request.Activo);

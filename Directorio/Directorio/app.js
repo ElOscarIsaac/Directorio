@@ -12,7 +12,20 @@ angular.module('Administrador', ['ngMaterial', 'ngRoute', 'ngCookies', 'Login', 
         })
         .otherwise({ redirectTo: '/login' });
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
-}])
+}]).config(['$mdThemingProvider',
+        function ($mdThemingProvider) {
+            var tealFuji = $mdThemingProvider.extendPalette('teal', {
+                '500': '#01916D',
+                'A100': '#01916D',
+                'contrastDefaultColor': 'light'
+            });
+            $mdThemingProvider.definePalette('FujiTheme', tealFuji);
+            $mdThemingProvider.theme('default')
+              .primaryPalette('FujiTheme')
+              .backgroundPalette('grey', {
+                  'default': '200'
+              })
+        }])
 .run(['$rootScope', '$location', '$cookieStore', '$http',
     function ($rootScope, $location, $cookieStore, $http) {
         // keep user logged in after page refresh

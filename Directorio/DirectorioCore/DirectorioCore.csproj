@@ -57,10 +57,12 @@
     <Compile Include="ServiceContracts\Request\AgregarEmpleadoRequest.cs" />
     <Compile Include="ServiceContracts\Request\CatalogoRequest.cs" />
     <Compile Include="ServiceContracts\Request\ConsultarEmpleadosRequest.cs" />
+    <Compile Include="ServiceContracts\Request\EliminarEmpleadoRequest.cs" />
     <Compile Include="ServiceContracts\Request\LoginRequest.cs" />
     <Compile Include="ServiceContracts\Response\AgregarEmpleadoResponse.cs" />
     <Compile Include="ServiceContracts\Response\CatalogoResponse.cs" />
     <Compile Include="ServiceContracts\Response\ConsultaEmpleadosResponse.cs" />
+    <Compile Include="ServiceContracts\Response\EliminarEmpleadoResponse.cs" />
     <Compile Include="ServiceContracts\Response\LoginResponse.cs" />
   </ItemGroup>
   <ItemGroup />

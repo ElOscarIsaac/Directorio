@@ -35,12 +35,28 @@
                     callback(response);
                 });
         };
+        service.EliminarEmpleado = function (data, callback) {
+            $http.post('http://' + location.host + '/Directorio/DirectorioService.svc/json/EliminarEmpleado',
+                    { Request: data }
+                ).success(function (response) {
+                    callback(response);
+                });
+        };
         service.AgregarEmpleado = function (data, Foto, callback) {
             var fd = new FormData();
             fd.append('request', JSON.stringify(data));
             fd.append('Foto', Foto);
             $http.post('http://' + location.host + '/Directorio/DirectorioService.svc/json/AgregarEmpleado',
-                fd, { transofrmRequest: angular.identity, headers: { 'Content-Type': undefined } }).success(function (response) {
+                fd, { transofrmRequest: angular.identity, headers: { 'Content-Type': 'charset=UTF-8' } }).success(function (response) {
+                    callback(response);
+                });
+        };
+        service.ActualizarEmpleado = function (data, Foto, callback) {
+            var fd = new FormData();
+            fd.append('request', JSON.stringify(data));
+            fd.append('Foto', Foto);
+            $http.post('http://' + location.host + '/Directorio/DirectorioService.svc/json/ActualizarEmpleado',
+                fd, { transofrmRequest: angular.identity, headers: { 'Content-Type': 'charset=UTF-8' } }).success(function (response) {
                     callback(response);
                 });
         };

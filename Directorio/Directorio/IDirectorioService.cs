@@ -67,7 +67,21 @@ namespace Directorio
         [WebInvoke(Method = "POST",
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "json/ActualizarEmpleado")]
+        AgregarEmpleadoResponse ActualizarEmpleado(Stream BinaryRequest);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "json/ConsultaEmpleados")]
         ConsultaEmpleadosResponse ConsultaEmpleados();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "json/EliminarEmpleado")]
+        EliminarEmpleadoResponse EliminarEmpleado(EliminarEmpleadoRequest Request);
     }
 }

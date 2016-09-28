@@ -6,13 +6,14 @@
     <link href="Presentation/styles/bootstrap.min.css" rel="stylesheet" />
     <link href="Presentation/styles/angular-material.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <meta charset="UTF-8 / ISO-8859-1" />
 </head>
 <body ng-app="Administrador">
     <header>
         <md-toolbar layout="row" layout-align="space-between center">
             <div>
                 <h2 class="md-headline" style="margin-left:15px;">
-                    <span>Sistema de directorio</span>
+                    <span>SAD (Sistema Administrador del Directorio)</span>
                 </h2>
             </div>
             <div ng-if="logeado" layout="column" layout-align="center center" ng-controller="SystemController">
@@ -27,12 +28,6 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-divider></md-menu-divider>
-                        <md-menu-item>
-                            <md-button ng-click="Settings($event)">
-                                <md-icon md-svg-icon="Presentation/assets/settings.svg" md-menu-align-target></md-icon>
-                                Configuración
-                            </md-button>
-                        </md-menu-item>
                         <md-menu-item>
                             <md-button href="#/login">
                                 <md-icon md-svg-icon="Presentation/assets/SignOut.svg" md-menu-align-target></md-icon>

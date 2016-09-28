@@ -111,6 +111,33 @@ namespace DirectorioCore.BusinessLogic
             return Response;
         }
         /// <summary>
+        /// Método que permite actualizar la información de un empleado en la base de datos
+        /// </summary>
+        /// <param name="Request"></param>
+        /// <returns></returns>
+        public AgregarEmpleadoResponse ActualizarEmpleado(Empleado Request)
+        {
+            AgregarEmpleadoResponse Response = new AgregarEmpleadoResponse();
+            try
+            {
+                if (DataAccess.DirectorioDA.ActualizaEmpleado(Request))
+                {
+                    Response.Message = "Empleado editado correctamente";
+                    Response.Success = true;
+                }
+                else
+                {
+                    Response.Message = "Ocurrió un problema al intentar actualizar el empleado en la base de datos";
+                    Response.Success = false;
+                }
+            }
+            catch (Exception exc)
+            {
+                Log.EscribeLog("Error al ejecutar el método BusinessLogic.ActualizarEmpleado: " + exc.Message);
+            }
+            return Response;
+        }
+        /// <summary>
         /// Método que permite extraer los empleados contenidos en el directorio
         /// </summary>
         /// <returns></returns>
@@ -126,6 +153,17 @@ namespace DirectorioCore.BusinessLogic
                 Log.EscribeLog("Error al ejecutar el método BusinessLogic.ConsultaEmpleados: " + exc.Message);
             }
             return Response;
+        }
+        /// <summary>
+        /// Método que permite eliminar un empleado
+        /// </summary>
+        /// <param name="EmpleadoId"></param>
+        /// <returns></returns>
+        public bool EliminarEmpleado(int EmpleadoId)
+        {
+            bool Eliminado = false;
+            Eliminado = DataAccess.DirectorioDA.EliminaEmpleado(EmpleadoId);
+            return Eliminado;
         }
         /// <summary>
         /// Método que permite enviar por correo las credenciales del usuario con el correo electrónico proporcionado

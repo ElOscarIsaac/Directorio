@@ -2,7 +2,8 @@
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Agregar Empleado</h2>
+                <h2 ng-if="!Actualizar">Agregar Empleado</h2>
+                <h2 ng-if="Actualizar">Editar Empleado</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="Presentation/assets/close.svg" aria-label="Close dialog"></md-icon>
@@ -12,7 +13,7 @@
         <md-dialog-content>
             <div class="md-dialog-content">
                 <h2>Modificar datos de usuario</h2>
-                <p style="margin-bottom:20px;">En el siguiente apartado podrá dar de alta un empleado al directorio</p>
+                <p style="margin-bottom:20px;">En el siguiente apartado podrá dar de alta o modificar un empleado en el directorio</p>
                 <ng-form name="EmpleadoForm" layout="column" layout-align="center stretch">
                     <div class="md-block" style="margin-bottom:15px;" flex>
                         <md-autocomplete md-selected-item="EmpleadoSeleccionado"
@@ -38,16 +39,16 @@
                     </md-input-container>
                     <md-input-container class="md-block" flex>
                         <label>Área</label>
-                        <md-select ng-model="Empleado.Departamento" name="Area" required placeholder="Área">
-                            <md-option ng-repeat="area in areas" ng-value="area">
+                        <md-select ng-model="Empleado.Departamento.id" name="Area" required placeholder="Área">
+                            <md-option ng-repeat="area in areas" ng-value="area.id" ng-selected="{{ area.id === Empleado.Departamento.id ? 'true' : 'false' }}">
                                 {{area.descripcion}}
                             </md-option>
                         </md-select>
                     </md-input-container>
                     <md-input-container class="md-block" flex>
                         <label>División</label>
-                        <md-select ng-model="Empleado.Division" name="Division" required>
-                            <md-option ng-repeat="division in DivisionesDisponibles()" ng-value="division">
+                        <md-select ng-model="Empleado.Division.id" name="Division" required>
+                            <md-option ng-repeat="division in DivisionesDisponibles()" ng-value="division.id" ng-selected="{{ division.id === Empleado.Division.id ? 'true' : 'false'}}">
                                 {{division.descripcion}}
                             </md-option>
                         </md-select>
@@ -77,8 +78,8 @@
                     </md-input-container>
                     <md-input-container class="md-block" flex>
                         <label>Ubicación</label>
-                        <md-select ng-model="Empleado.Ubicacion" name="Ubicacion" required>
-                            <md-option ng-repeat="ubicacion in ubicaciones" ng-value="ubicacion">
+                        <md-select ng-model="Empleado.Ubicacion.id" name="Ubicacion" required>
+                            <md-option ng-repeat="ubicacion in ubicaciones" ng-value="ubicacion.id" ng-selected="{{ ubicacion.id === Empleado.Ubicacion.id ? 'true' : 'false' }}">
                                 {{ubicacion.descripcion}}
                             </md-option>
                         </md-select>
@@ -88,13 +89,16 @@
                     <img src="Presentation/assets/addFile.png" style="width:32px; height:auto; margin-right:10px; margin-left:10px;" />
                     <input id="Foto" type="file" onchange="angular.element(this).scope().FotoLoaded = true;" accept="image/jpeg" />
                 </div>
+                <div layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="indeterminate" ng-if="loading"></md-progress-circular>
+                </div>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <md-button class="md-raised" ng-click="cancel()">
                 Cancelar
             </md-button>
-            <md-button class="md-raised md-primary" ng-click="save(Empleado)" ng-disabled="EmpleadoForm.$invalid || !EmpleadoSeleccionado">
+            <md-button class="md-raised md-primary" ng-click="save(Empleado)" ng-disabled="EmpleadoForm.$invalid || !EmpleadoSeleccionado || loading">
                 Guardar
             </md-button>
         </md-dialog-actions>

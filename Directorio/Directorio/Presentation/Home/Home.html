@@ -1,5 +1,5 @@
 ﻿
-<div flex-xs flex-gt-xs="65" layout="row" layout-align="center">
+<md-content flex-xs layout="row" layout-align="center">
     <md-card flex>
         <md-card-title>
             <md-card-title-text>
@@ -17,40 +17,63 @@
                                 <md-menu-item>
                                     <md-button ng-click="AgregarEmpleado($event, false)">
                                         <md-icon md-svg-icon="Presentation/assets/AddClient.svg" md-menu-align-target></md-icon>
-                                        Agregar Empleado
+                                        {{'Agregar Empleado'}}
                                     </md-button>
                                 </md-menu-item>
                             </md-menu-content>
                         </md-menu>
                     </div>
                 </md-toolbar>
-                <div class="table-responsive">
-                    <table st-table="Empleados" class="table table-sm table-hover" >
+                <md-content layout-gt-sm="row" layout-padding layout-align="start end">
+                    <form layout="row">
+                        <md-input-container class="md-block">
+                            <label>Nombre</label>
+                            <input ng-model="busqueda" type="text">
+                        </md-input-container>
+                        <div style="margin-top:8px;">
+                            <md-button class="md-primary md-raised" ng-click="BuscarEmpleado(busqueda)" type="submit">Buscar</md-button>
+                        </div>
+                    </form>
+                </md-content>
+                <div>
+                    <table class="table table-sm table-hover" >
                         <thead>
                             <tr>
-                                <th class=" text-center">
+                                <th class="text-center">
 
                                 </th>
-                                <th class="text-center" st-sort="Id">Folio</th>
-                                <th class="text-center" st-sort="Nombre">Nombre</th>
-                                <th class="text-center">Area</th>
+                                <th >Folio</th>
+                                <th >Nombre</th>
+                                <th >Area</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="Empleado in Empleados">
+                            <tr ng-repeat="Empleado in pagedItems[currentPage]">
                                 <td class="text-center">
-                                    <md-icon title="Editar empleado" md-svg-src="Presentation/assets/edit.svg" ng-click=""></md-icon>
-                                    <md-icon title="Eliminar empleado" md-svg-src="Presentation/assets/delete.svg" ng-click=""></md-icon>
+                                    <md-icon title="Editar empleado" md-svg-src="Presentation/assets/edit.svg" ng-click="AgregarEmpleado($event, Empleado)"></md-icon>
+                                    <md-icon title="Eliminar empleado" md-svg-src="Presentation/assets/delete.svg" ng-click="showConfirmOnDelete($event, Empleado)"></md-icon>
                                 </td>
-                                <td class="text-center">{{Empleado.Id}}</td>
+                                <td class="text-left">{{Empleado.Id}}</td>
                                 <td class="text-left">{{Empleado.Nombre}}</td>
                                 <td class="text-left">{{Empleado.Departamento.descripcion}}</td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="7" class="text-center">
-                                    <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5"></div>
+                                <td colspan="9">
+                                    <div class="text-center">
+                                        <ul class="pagination">
+                                            <li ng-class="{disabled: currentPage == 0}">
+                                                <a href="javascript:;" ng-click="prevPage()">« Prev</a>
+                                            </li>
+                                            <li ng-repeat="n in range(pagedItems.length)" ng-class="{active: n == currentPage}" ng-click="setPage()">
+                                                <a href="javascript:;" ng-bind="n + 1">1</a>
+                                            </li>
+                                            <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                                                <a href="javascript:;" ng-click="nextPage()">Next »</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         </tfoot>
