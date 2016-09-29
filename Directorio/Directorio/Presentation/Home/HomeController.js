@@ -66,13 +66,13 @@ function ($scope, $mdDialog, $rootScope, $location, $cookieStore, SystemServices
         }
         $scope.loadEmpleados();
         $scope.querySearch = function (query) {
-            Empleados = [];
-            for (i = 0; i < $scope.empleados.length; i++) {
-                if ($scope.empleados[i].descripcion.includes(query)) {
-                    Empleados.push($scope.empleados[i]);
-                }
-            }
-            return Empleados;
+            return query ? $scope.empleados.filter(createFilterFor(query)) : $scope.empleados;
+        }
+        function createFilterFor(query) {
+            var uppercaseQuery = angular.uppercase(query);
+            return function filterFn(empleado) {
+                return empleado.descripcion.includes(uppercaseQuery);
+            };
         }
         $scope.Empleado = {
             Nombre: '',
@@ -89,11 +89,10 @@ function ($scope, $mdDialog, $rootScope, $location, $cookieStore, SystemServices
             AUDUSUARIO: Usuario.Id
         };
         $scope.Actualizar = false;
-        $scope.EmpleadoSeleccionado = {  };
-        
         $scope.Initialize = function () {
             $scope.loading = false;
             if (empleado) {
+                $scope.EmpleadoSeleccionado = {};
                 $scope.Empleado = empleado;
                 for (i = 0; i < $scope.empleados.length; i++) {
                     if ($scope.empleados[i].codigo == empleado.Puesto && $scope.empleados[i].descripcion == empleado.Nombre) {
