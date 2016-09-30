@@ -409,6 +409,42 @@ namespace DirectorioCore.DataAccess
             return Eliminado;
         }
         /// <summary>
+        /// Método que permite revisar si ya existe algún empleado con ese nombre dado de alta en el sistema
+        /// </summary>
+        /// <param name="Nombre"></param>
+        /// <returns></returns>
+        public static bool ExisteEmpleado(string Nombre)
+        {
+            bool Existe = false;
+            try
+            {
+                using (MySqlConnection connection = Conectar())
+                {
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = @" SELECT EM.EmpleadoID
+		                                       FROM Empleado EM
+                                              WHERE EM.bitActivo = 1 AND EM.vchNombre = @Nombre";
+                    command.Parameters.AddWithValue("@Nombre", Nombre);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        int Id = 0;
+                        if (reader.Read())
+                        {
+                            Id = reader.GetInt32("EmpleadoID");                            
+                        }
+                        Existe = Id > 0 ? true : false;
+                        reader.Close();
+                    }
+                    connection.Close();
+                }
+            }
+            catch(Exception exc)
+            {
+                BusinessLogic.Log.EscribeLog("Error al ejectuar el metodo DirectorioDA.ExisteEmpleado : " + exc.Message);
+            }
+            return Existe;
+        }
+        /// <summary>
         /// Permite hacer la consulta de los empleados activos en la base de datos
         /// </summary>
         /// <returns></returns>
@@ -440,7 +476,8 @@ namespace DirectorioCore.DataAccess
 										 INNER JOIN Departamento D ON D.DepartamentoID = EM.DepartamentoID
                                          INNER JOIN Division DI ON DI.DivisionID = EM.DivisionID
                                          INNER JOIN Ubicacion U ON U.UbicacionID = EM.UbicacionID
-                                              WHERE EM.bitActivo = 1;";
+                                              WHERE EM.bitActivo = 1
+                                           ORDER BY EM.UbicacionID, EM.DepartamentoID, EM.vchNombre";
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         Empleado entidad;

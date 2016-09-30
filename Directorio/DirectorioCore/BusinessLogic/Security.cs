@@ -47,27 +47,33 @@ namespace DirectorioCore.BusinessLogic
         /// <returns></returns>
         public static string Decrypt(string Token)
         {
-            string CadenaEncriptada = HexToString(Token);
-            byte[] Results;
-            System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
-            MD5CryptoServiceProvider HashProvider = new MD5CryptoServiceProvider();
-            byte[] TDESKey = HashProvider.ComputeHash(UTF8.GetBytes(ConfigurationManager.AppSettings["Clave"].ToString()));
-            TripleDESCryptoServiceProvider TDESAlgorithm = new TripleDESCryptoServiceProvider();
-            TDESAlgorithm.Key = TDESKey;
-            TDESAlgorithm.Mode = CipherMode.ECB;
-            TDESAlgorithm.Padding = PaddingMode.PKCS7;
-            byte[] DataToDecrypt = Convert.FromBase64String(CadenaEncriptada);
+            string response = "";
             try
             {
-                ICryptoTransform Decryptor = TDESAlgorithm.CreateDecryptor();
-                Results = Decryptor.TransformFinalBlock(DataToDecrypt, 0, DataToDecrypt.Length);
+                string CadenaEncriptada = HexToString(Token);
+                byte[] Results;
+                System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
+                MD5CryptoServiceProvider HashProvider = new MD5CryptoServiceProvider();
+                byte[] TDESKey = HashProvider.ComputeHash(UTF8.GetBytes(ConfigurationManager.AppSettings["Clave"].ToString()));
+                TripleDESCryptoServiceProvider TDESAlgorithm = new TripleDESCryptoServiceProvider();
+                TDESAlgorithm.Key = TDESKey;
+                TDESAlgorithm.Mode = CipherMode.ECB;
+                TDESAlgorithm.Padding = PaddingMode.PKCS7;
+                byte[] DataToDecrypt = Convert.FromBase64String(CadenaEncriptada);
+                try
+                {
+                    ICryptoTransform Decryptor = TDESAlgorithm.CreateDecryptor();
+                    Results = Decryptor.TransformFinalBlock(DataToDecrypt, 0, DataToDecrypt.Length);
+                    response = UTF8.GetString(Results);
+                }
+                finally
+                {
+                    TDESAlgorithm.Clear();
+                    HashProvider.Clear();
+                }
             }
-            finally
-            {
-                TDESAlgorithm.Clear();
-                HashProvider.Clear();
-            }
-            return UTF8.GetString(Results);
+            catch (Exception e) { }
+            return response;
         }
         /// <summary>
         /// Permite validar si el token es válido
@@ -77,14 +83,18 @@ namespace DirectorioCore.BusinessLogic
         public static bool ValidateToken(string Token)
         {
             bool Valid = false;
-            string[] Elements = Decrypt(Token).Split('|');
-            if (Elements.Length > 0)
+            try
             {
-                Entities.Usuario USER = new Entities.Usuario();
-                USER = DataAccess.DirectorioDA.GetUser(Elements[1], Elements[2]);
-                if (USER.Id == Convert.ToInt32(Elements[0]))
-                    Valid = true;
+                string[] Elements = Decrypt(Token).Split('|');
+                if (Elements.Length > 0)
+                {
+                    Entities.Usuario USER = new Entities.Usuario();
+                    USER = DataAccess.DirectorioDA.GetUser(Elements[1], Elements[2]);
+                    if (USER.Id == Convert.ToInt32(Elements[0]))
+                        Valid = true;
+                }
             }
+            catch (Exception exc) { }
             return Valid;
         }
         /// <summary>
@@ -111,18 +121,22 @@ namespace DirectorioCore.BusinessLogic
         private static string HexToString(string hex)
         {
             string cadena = "";
-            if (hex.Length % 2 == 0)
+            try
             {
-                for (int i = 0; i < hex.Length; i = i + 2)
+                if (hex.Length % 2 == 0)
                 {
-                    int value = Convert.ToInt32(hex.Substring(i, 2), 16);
-                    cadena += (char)value;
+                    for (int i = 0; i < hex.Length; i = i + 2)
+                    {
+                        int value = Convert.ToInt32(hex.Substring(i, 2), 16);
+                        cadena += (char)value;
+                    }
+                }
+                else
+                {
+                    throw new Exception("Cadena inválida");
                 }
             }
-            else
-            {
-                throw new Exception("Cadena inválida");
-            }
+            catch (Exception e) { cadena = ""; }
             return cadena;
         }
     }

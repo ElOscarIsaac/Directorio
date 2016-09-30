@@ -1,5 +1,5 @@
 ﻿angular.module('Login', ['ngMaterial', 'ngMessages']);
-angular.module('Administrador', ['ngMaterial', 'ngRoute', 'ngCookies', 'Login', 'smart-table', 'ui.bootstrap'])
+angular.module('Administrador', ['ngMaterial', 'ngRoute', 'ngCookies', 'Login', 'ui.bootstrap'])
 .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
     $routeProvider
         .when('/login', {

@@ -81,13 +81,19 @@ INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (14, 'NIN
 INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (15, 'NINGUNO',1);
 INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (16, 'NINGUNO',1);
 INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (17, 'NINGUNO',1);
+INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (12, 'CONTABILIDAD FINANCIERA',1);
+INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (12, 'CRÉDITO Y COBRANZA',1);
+INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (12, 'JURÍDICO',1);
+INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (12, 'CONTRALORÍA',1);
+INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (1, 'ADMINISTRACIÓN',1);
+INSERT INTO Division(DepartamentoID, vchDescripcion, bitActivo) VALUES (1, 'CALL CENTER',1);
 -- use Directorio; drop table Empleado;
 CREATE TABLE Empleado(
 	EmpleadoID INT PRIMARY KEY AUTO_INCREMENT,
     vchNombre VARCHAR(100) NOT NULL,
     vchExtension VARCHAR(5) NOT NULL,
     vchPuesto VARCHAR(50) NOT NULL,
-    vchCorreo VARCHAR(100) NOT NULL,
+    vchCorreo VARCHAR(100),
     vchCelular VARCHAR(15),
     DepartamentoID INT NOT NULL,
     foreign key (DepartamentoID) references Departamento(DepartamentoID),

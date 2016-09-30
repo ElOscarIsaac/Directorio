@@ -91,18 +91,25 @@ namespace DirectorioCore.BusinessLogic
             AgregarEmpleadoResponse Response = new AgregarEmpleadoResponse();
             try 
             {
-                Request.Id = DataAccess.DirectorioDA.InsertaEmpleado(Request);
-                if(Request.Id > 0)
+                if (!DataAccess.DirectorioDA.ExisteEmpleado(Request.Nombre))
                 {
-                    Response.Message = "Empleado agregado correctamente";
-                    Response.Success = true;
+                    Request.Id = DataAccess.DirectorioDA.InsertaEmpleado(Request);
+                    if (Request.Id > 0)
+                    {
+                        Response.Message = "Empleado agregado correctamente";
+                        Response.Success = true;
+                    }
+                    else
+                    {
+                        Response.Message = "Ocurrió un problema al intentar insertar el empleado en la base de datos";
+                        Response.Success = false;
+                    }
                 }
                 else
                 {
-                    Response.Message = "Ocurrió un problema al intentar insertar el empleado en la base de datos";
                     Response.Success = false;
+                    Response.Message = "El empleado " + Request.Nombre + " ya se encuentra registrado en el directorio";
                 }
-                
             }
             catch (Exception exc)
             {

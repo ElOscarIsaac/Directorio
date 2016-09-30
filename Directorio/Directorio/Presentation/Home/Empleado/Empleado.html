@@ -66,9 +66,8 @@
                     </md-input-container>
                     <md-input-container class="md-block" flex>
                         <label>Correo Electrónico</label>
-                        <input type="email" required ng-model="Empleado.Correo" name="Correo" />
+                        <input type="email" ng-model="Empleado.Correo" name="Correo" />
                         <div ng-messages="EmpleadoForm.Correo.$error" ng-if="EmpleadoForm.Correo.$touched">
-                            <div ng-message="required">Información requerida</div>
                             <div ng-message="email">Correo electrónico inválido</div>
                         </div>
                     </md-input-container>
