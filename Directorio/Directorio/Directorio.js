@@ -77,8 +77,11 @@ angular.module('Directorio').controller('aplicacion', ['$scope', 'DirectorioServ
             if ($scope.ListaCompletaColaboradores[i].Nombre.toLowerCase().includes(busqueda.nombre.toLowerCase())) {
                 if(busqueda.ubicacion.id != 0){
                     if ($scope.ListaCompletaColaboradores[i].Ubicacion.id === busqueda.ubicacion.id) {
-                        if (busqueda.departamento) {
+                        if (busqueda.departamento.id != 0) {
                             if ($scope.ListaCompletaColaboradores[i].Departamento.id === busqueda.departamento.id)
+                                lista.push($scope.ListaCompletaColaboradores[i]);
+                        }
+                        else{
                                 lista.push($scope.ListaCompletaColaboradores[i]);
                         }
                     }
