@@ -12,6 +12,9 @@ CREATE TABLE Usuarios(
 INSERT INTO Usuarios(vchNombreEmpleado, vchNombreUsuario, vchPassword, vchCorreoElectronico, datFechaRegistro, bitActivo) VALUES(
 	'LAZARO ADRIAN GONZALEZ MONTOYA', 'lgonzalez', 'livsolskjaer', 'lgonzalez@fujifilm.com.mx', CURDATE(), 1
 );
+INSERT INTO Usuarios(vchNombreEmpleado, vchNombreUsuario, vchPassword, vchCorreoElectronico, datFechaRegistro, bitActivo) VALUES(
+	'JESUS ELIAS VAZQUEZ CRUZ', 'jvazquez', 'jomi', 'jvazquez@fujifilm.com.mx', CURDATE(), 1
+);
 CREATE TABLE Ubicacion(
 	UbicacionID INT PRIMARY KEY AUTO_INCREMENT,
     vchDescripcion VARCHAR(100) NOT NULL,

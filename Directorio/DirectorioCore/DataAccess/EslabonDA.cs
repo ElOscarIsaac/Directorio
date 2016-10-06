@@ -20,7 +20,7 @@ namespace DirectorioCore.DataAccess
             List<Catalogo> Empleados = new List<Catalogo>();
             try
             {
-                string QueryString = @" select distinct r.id,  r.nombre + ' ' + r.paterno + ' ' + r.materno, em.Puesto
+                string QueryString = @" select distinct r.id,  r.nombre + ' ' + r.paterno, em.Puesto
                                           from vwEmpleados em
                                     inner join recursos r on r.id = em.idEmpleado
                                         ";

@@ -97,7 +97,7 @@
             <md-button class="md-raised" ng-click="cancel()">
                 Cancelar
             </md-button>
-            <md-button class="md-raised md-primary" ng-click="save(Empleado)" ng-disabled="EmpleadoForm.$invalid || !EmpleadoSeleccionado || loading">
+            <md-button class="md-raised md-primary" ng-click="save(Empleado)" ng-disabled="EmpleadoForm.$invalid || Empleado.Nombre.length < 1 || loading">
                 Guardar
             </md-button>
         </md-dialog-actions>

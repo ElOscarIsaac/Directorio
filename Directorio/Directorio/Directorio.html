@@ -57,7 +57,10 @@
                             <span class="md-subhead" ng-if="colaborador.Division.descripcion != 'NINGUNO'">&nbsp; / &nbsp;{{colaborador.Division.descripcion}}</span>
                         </div>
                         <span class="md-subhead">{{colaborador.Puesto}}</span>
-                        <span class="md-subhead"><strong>{{colaborador.Extension}}</strong></span>
+						<div layout="row">
+							<span class="md-subhead">Ext. <strong>{{colaborador.Extension}}</strong></span>
+							<span class="md-subhead" ng-if="colaborador.NumeroDirecto.length > 0">&nbsp; / &nbsp;Directo <strong>{{colaborador.NumeroDirecto}}</strong></span>
+						</div>
                         <span class="md-subhead">{{colaborador.Correo}}</span>
                         <span class="md-subhead">{{colaborador.Ubicacion.descripcion}}</span>
                         <span class="md-subhead" ng-if="colaborador.Celular">Cel. {{colaborador.Celular}}</span>
