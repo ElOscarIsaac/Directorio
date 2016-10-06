@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Directorio Fujifilm de México</title>
@@ -15,15 +15,16 @@
         </div>
     </header>
     <md-content ng-controller="aplicacion" layout="column" layout-align="center center" ng-cloak>
+	<md-progress-linear class="md-accent" ng-if="dataLoading" md-mode="indeterminate"></md-progress-linear>
         <md-content layout-gt-sm="row" layout-padding layout-align="start end">
             <form layout="row" style="min-width:670px;">
                 <md-input-container class="md-block" flex>
                     <label>Nombre</label>
-                    <input ng-model="busqueda.nombre" type="text">
+                    <input ng-model="busqueda.nombre" type="text" ng-disabled="dataLoading">
                 </md-input-container>
                 <md-input-container class="md-block" flex>
                     <label>Área</label>
-                    <md-select ng-model="busqueda.departamento.id" name="Area" placeholder="Área">
+                    <md-select ng-model="busqueda.departamento.id" name="Area" placeholder="Área" ng-disabled="dataLoading">
                         <md-option ng-repeat="area in areas" ng-value="area.id">
                             {{area.descripcion}}
                         </md-option>
@@ -31,14 +32,14 @@
                 </md-input-container>
                 <md-input-container class="md-block" flex>
                     <label>Ubicación</label>
-                    <md-select ng-model="busqueda.ubicacion.id" name="ubicacion" placeholder="Ubicación">
+                    <md-select ng-model="busqueda.ubicacion.id" name="ubicacion" placeholder="Ubicación" ng-disabled="dataLoading">
                         <md-option ng-repeat="ubicacion in ubicaciones" ng-value="ubicacion.id">
                             {{ubicacion.descripcion}}
                         </md-option>
                     </md-select>
                 </md-input-container>
                 <div style="margin-top:8px;">
-                    <md-button class="md-primary md-raised" ng-click="BuscarColaborador(busqueda)" type="submit">Buscar</md-button>
+                    <md-button class="md-primary md-raised" ng-click="BuscarColaborador(busqueda)" type="submit" ng-disabled="dataLoading">Buscar</md-button>
                 </div>
             </form>
         </md-content>
